@@ -2,7 +2,7 @@ import { openDatabase } from 'expo-sqlite'
 import * as Analytics from 'expo-firebase-analytics'
 import * as actionTypes from './actionTypes'
 
-const db = openDatabase('maker.db')
+const db = openDatabase('wakeUp.db')
 
 export const onInitCategories = (categories) => ({
 	type: actionTypes.INIT_CATEGORIES,

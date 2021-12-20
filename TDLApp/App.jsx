@@ -16,7 +16,7 @@ import tasksReducer from './src/reducers/tasks'
 import listsReducer from './src/reducers/lists'
 import cateReducer from './src/reducers/categories'
 import themeReducer from './src/reducers/theme'
-import profileReducer from './src/reducers/profile'
+import analysisReducer from './src/reducers/analysis'
 import settingsReducer from './src/reducers/settings'
 import configReducer from './src/reducers/config'
 
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   lists: listsReducer,
   categories: cateReducer,
   theme: themeReducer,
-  profile: profileReducer,
+  analysis: analysisReducer,
   settings: settingsReducer,
   config: configReducer,
 })

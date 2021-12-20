@@ -1,7 +1,7 @@
 import { openDatabase } from 'expo-sqlite'
 import * as actionTypes from './actionTypes'
 
-const db = openDatabase('maker.db')
+const db = openDatabase('wakeUp.db')
 
 export const onUpdateAnalysis = (analysis) => ({
 	type: actionTypes.UPDATE_ANALYSIS,
