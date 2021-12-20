@@ -3,7 +3,6 @@ import { SceneMap, TabBar, TabView } from 'react-native-tab-view'
 import Spinner from '../components/Spinner'
 import TaskList from './TaskList'
 import Template from '../etc/Template'
-import QuicklyList from './QuickList'
 
 import * as actions from '../actions'
 import { connect } from 'react-redux'
@@ -14,7 +13,6 @@ class Main extends Component {
 			index: 0,
 			routes: [
 				{ key: 'tasks', title: this.props.translations.tasks },
-				{ key: 'lists', title: this.props.translations.quicklyLists },
 			],
 		},
 		loading: true,
@@ -23,7 +21,7 @@ class Main extends Component {
 	componentDidMount() {
 		this.props.onInitTheme()
 		this.props.onInitCategories()
-		this.props.onInitProfile()
+		this.props.onInitAnalysis()
 		this.props.onInitToDo()
 		this.props.onInitLists()
 		this.props.onInitSettings(() => {
@@ -37,7 +35,6 @@ class Main extends Component {
 			const { translations } = this.props
 
 			tabs.routes[0].title = translations.tasks
-			tabs.routes[1].title = translations.quicklyLists
 			this.setState({ tabs })
 		}
 	}
@@ -59,7 +56,6 @@ class Main extends Component {
 							}}
 							renderScene={SceneMap({
 								tasks: () => <TaskList navigation={navigation} />,
-								lists: () => <QuicklyList navigation={navigation} />,
 							})}
 							renderTabBar={(props) => (
 								<TabBar
@@ -96,7 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onInitLists: () => dispatch(actions.initLists()),
 	onInitCategories: () => dispatch(actions.initCategories()),
 	onInitTheme: () => dispatch(actions.initTheme()),
-	onInitProfile: () => dispatch(actions.initProfile()),
+	onInitAnalysis: () => dispatch(actions.initAnalysis()),
 	onInitSettings: (callback) => dispatch(actions.initSettings(callback)),
 })
 

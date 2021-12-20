@@ -14,11 +14,8 @@ export {
 export {
 	initLists,
 	initList,
-	initQuicklyTask,
 	saveList,
-	saveQuicklyTask,
 	removeList,
-	removeQuicklyTask,
 } from './lists'
 
 export { initCategories, initCategory, saveCategory, removeCategory } from './categories'

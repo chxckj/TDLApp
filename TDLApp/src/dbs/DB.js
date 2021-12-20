@@ -25,9 +25,6 @@ export const initDatabase = (callback) => {
 				'create table if not exists lists (id integer primary key not null, name text);',
 			)
 			tx.executeSql(
-				'create table if not exists quickly_tasks (id integer primary key not null, name text, list_id integer not null, order_nr integer DEFAULT 0);',
-			)
-			tx.executeSql(
 				'create table if not exists themes (id integer primary key not null, name text, primaryColor text, primaryBackgroundColor text, secondaryBackgroundColor text, primaryTextColor text, secondaryTextColor text, thirdTextColor text, warningColor text, doneIconColor text, undoIconColor text, lowColor text, mediumColor text, highColor text);',
 			)
 			tx.executeSql(

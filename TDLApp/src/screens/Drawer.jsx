@@ -28,7 +28,7 @@ class DrawerContainer extends Component {
 							},
 							{
 								icon: 'analysis',
-								value: translations.profile,
+								value: translations.analysis,
 								onPress: () => navigation.navigate('Analysis'),
 							},
 						]}

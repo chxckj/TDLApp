@@ -8,14 +8,14 @@ import Input from '../components/Input'
 import Template from '../etc/Template'
 import Spinner from '../components/Spinner'
 import { separator } from '../etc/Style'
-import styles from './ProfileStyle'
+import styles from './AnalysisStyle'
 
 import * as actions from '../actions'
 import { connect } from 'react-redux'
 
 const defaultAvatar = require('../assets/profile.png')
 
-class Profile extends PureComponent {
+class Analysis extends PureComponent {
 	state = {
 		name: '',
 		showDefaultAvatar: false,
@@ -23,12 +23,12 @@ class Profile extends PureComponent {
 	}
 
 	componentDidMount() {
-		const { onInitSettings, onInitProfile } = this.props
+		const { onInitSettings, onInitAnalysis } = this.props
 
 		onInitSettings()
-		onInitProfile(() => {
-			const { profile } = this.props
-			this.setState({ loading: false, name: profile.name })
+		onInitAnalysis(() => {
+			const { analysis } = this.props
+			this.setState({ loading: false, name: analysis.name })
 		})
 	}
 
@@ -36,36 +36,6 @@ class Profile extends PureComponent {
 		const { onUpdateSnackbar } = this.props
 
 		onUpdateSnackbar(visible, message)
-	}
-
-	getPermissionAsync = async () => {
-		const { translations } = this.props
-		if (Constants.platform.ios) {
-			const { status } = await askAsync(CAMERA_ROLL)
-			if (status === 'granted') {
-				await this.pickImage()
-			} else {
-				this.toggleSnackbar(translations.permission)
-			}
-		} else {
-			await this.pickImage()
-		}
-	}
-
-	pickImage = async () => {
-		const result = await launchImageLibraryAsync({
-			mediaTypes: MediaTypeOptions.All,
-			allowsEditing: true,
-			aspect: [4, 3],
-		})
-
-		if (!result.cancelled) {
-			const { onChangeAvatar } = this.props
-
-			onChangeAvatar(result.uri, () => {
-				this.setState({ showDefaultAvatar: false })
-			})
-		}
 	}
 
 	render() {
@@ -76,7 +46,7 @@ class Profile extends PureComponent {
 			tasks,
 			lists,
 			finished,
-			profile,
+			analysis,
 			categories,
 			onChangeName,
 			translations,
@@ -86,11 +56,10 @@ class Profile extends PureComponent {
 		const listData = []
 		listData.push({ label: translations.allTask, data: tasks.length + finished.length })
 		listData.push({ label: translations.finishedTask, data: finished.length })
-		listData.push({ label: translations.endedTask, data: profile.endedTask })
+		listData.push({ label: translations.endedTask, data: analysis.endedTask })
 		listData.push({ label: translations.allCategories, data: categories.length })
-		listData.push({ label: translations.allQuicklyLists, data: lists.length })
 
-		if (profile.id === 0) {
+		if (analysis.id === 0) {
 			list = listData.map((item, index) => (
 				<View key={index}>
 					<View style={[styles.item, { backgroundColor: theme.primaryBackgroundColor }]}>
@@ -112,7 +81,7 @@ class Profile extends PureComponent {
 
 				{!loading ? (
 					<ScrollView>
-						{profile.id === 0 && (
+						{analysis.id === 0 && (
 							<View
 								style={{
 									backgroundColor: theme.secondaryBackgroundColor,
@@ -123,7 +92,7 @@ class Profile extends PureComponent {
 									<Image
 										style={styles.image}
 										source={
-											profile.avatar && !showDefaultAvatar ? { uri: profile.avatar } : defaultAvatar
+											analysis.avatar && !showDefaultAvatar ? { uri: analysis.avatar } : defaultAvatar
 										}
 										onError={() => {
 											this.setState({ showDefaultAvatar: true })
@@ -158,19 +127,19 @@ const mapStateToProps = (state) => ({
 	settings: state.settings.settings,
 	tasks: state.tasks.tasks,
 	finished: state.tasks.finished,
-	profile: state.profile,
+	analysis: state.analysis,
 	categories: state.categories.categories,
 	lists: state.lists.lists,
-	translations: state.settings.translations.Profile,
+	translations: state.settings.translations.Analysis,
 })
 
 const mapDispatchToProps = (dispatch) => ({
 	onInitSettings: () => dispatch(actions.initSettings()),
-	onInitProfile: (callback) => dispatch(actions.initProfile(callback)),
+	onInitAnalysis: (callback) => dispatch(actions.initAnalysis(callback)),
 	onChangeName: (name) => dispatch(actions.changeName(name)),
 	onChangeAvatar: (avatar, callback) => dispatch(actions.changeAvatar(avatar, callback)),
 	onUpdateSnackbar: (showSnackbar, snackbarText) =>
 		dispatch(actions.updateSnackbar(showSnackbar, snackbarText)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Analysis)

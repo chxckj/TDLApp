@@ -3,15 +3,15 @@ import { updateObject } from '../etc/Utility'
 
 const initState = {}
 
-const updateProfile = (state, action) =>
+const updateAnalysis = (state, action) =>
 	updateObject(state, {
-		...action.profile,
+		...action.analysis,
 	})
 
 const reducer = (state = initState, action) => {
 	switch (action.type) {
-		case actionTypes.UPDATE_PROFILE:
-			return updateProfile(state, action)
+		case actionTypes.UPDATE_ANALYSIS:
+			return updateAnalysis(state, action)
 		default:
 			return state
 	}

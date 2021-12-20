@@ -1,9 +1,8 @@
 {
 	"expo": {
-		"name": "Maker - ToDo List",
-		"slug": "maker",
-		"description": "Maker is an advanced ToDo mobile application created with React Native and Expo framework. This app working with Android and iOS.",
-		"githubUrl": "https://github.com/mateuszpijanowski/maker",
+		"name": "Wake Up ToDo List",
+		"description": "Wake Up ToDo List",
+		"githubUrl": "https://github.com/chxckj/TDLApp.git",
 		"privacy": "public",
 		"version": "1.0.0",
 		"ios": {
@@ -13,7 +12,6 @@
 			"usesIcloudStorage": true,
 			// "googleServicesFile": "./firebase/GoogleService-Info.plist",
 			"infoPlist": {
-				"NSPhotoLibraryUsageDescription": "We need this for selecting profile avatar.",
 				"NSCalendarsUsageDescription": "We need this for saving task in system calendar."
 			}
 		},
